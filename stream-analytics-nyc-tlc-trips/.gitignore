@@ -1,0 +1,14 @@
+#API Keys & Secrets
+.env
+.env.*
+
+#Terraform Resource Provisioning Files
+.terraform/
+.terraform.*
+
+# Terraform State & Backups Files
+*.tfstate
+*.tfstate.*
+
+# Package manager locks
+.terraform.lock.hcl
