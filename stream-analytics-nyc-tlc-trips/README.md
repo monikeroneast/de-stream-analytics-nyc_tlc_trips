@@ -1,40 +1,40 @@
-# NYC Yellow Taxi Trip Analytics Pipeline
+## 🚀 How to Run
 
-This repository contains an end-to-end data engineering pipeline that ingests, processes, and visualizes real-time and historical NYC Yellow Taxi trip data. 
-
-This project was built as a capstone project for the **[DataTalksClub Data Engineering Zoomcamp](https://github.com)**. It is heavily inspired by and builds upon the structural foundations found in the various peer reference repositories as well.
-
-## 🏗 Architecture & Workflow
-
-The architecture uses a mix of streaming infrastructure, cloud storage, data warehousing optimizations, and downstream transformation workflows:
-
-```text
-┌─────────────┐     ┌──────────────┐     ┌──────────────┐     ┌───────────────┐
-│  NYC Taxi   │────▶│    Kafka     │────▶│     GCS      │────▶│   BigQuery    │
-│ Parquet Data│     │  Streaming   │     │ (Data Lake)  │     │  (Warehouse)  │
-└─────────────┘     └──────────────┘     └──────────────┘     └───────┬───────┘
-                                                                      │
-                                                                      ▼
-┌─────────────┐                                               ┌───────────────┐
-│  Streamlit  │◀──────────────────────────────────────────────│   dbt Core    │
-│ (Dashboard) │                                               │(Transformations)
-└─────────────┘                                               └───────────────┘
+### 1. Provision Infrastructure
+Authenticate with Google Cloud and build your GCP resources using Terraform:
+```bash
+cd terraform
+terraform init
+terraform apply
 ```
 
-1. **Infrastructure as Code:** Google Cloud Platform (GCP) resources are provisioned deterministically via **Terraform**.
-2. **Ingestion & Streaming:** A Python-based **Apache Kafka** producer simulates real-time ingestion, streaming batch taxi events to a dedicated Kafka topic. A Kafka consumer ingests the stream directly into a **Google Cloud Storage (GCS)** data lake.
-3. **Data Warehousing:** Raw cloud storage objects are batch-loaded into **Google BigQuery**, utilizing strict **partitioning** (by pickup date) and **clustering** (by location/payment type) to keep analytical query costs low.
-4. **Data Transformation:** Analytics-ready models are built inside BigQuery using **dbt Core**, modularized into staging layers and semantic analytical marts.
-5. **Visualization:** Downstream transformed business metrics are surfaced through an interactive, browser-accessible **Streamlit** dashboard showing trip distributions, monthly trends, and pricing analysis.
+### 2. Start Streaming Pipeline
+Spin up the Kafka environment and run your streaming scripts to move data to GCS:
+```bash
+# Start Kafka & Zookeeper
+cd ../kafka
+docker-compose up -d
 
-## 🛠 Tech Stack
+# Run Python streaming scripts
+python producer.py
+python consumer.py
+```
 
-* **Cloud Platform:** Google Cloud Platform (GCP)
-* **IaC:** Terraform
-* **Message Broker:** Apache Kafka (Confluent / Docker Containerized)
-* **Data Lake:** Google Cloud Storage (GCS)
-* **Data Warehouse:** Google BigQuery
-* **Transformation Layer:** dbt Core
-* **Dashboard / Frontend:** Streamlit
-* **Containerization:** Docker & Docker Compose
+### 3. Load & Transform Data
+Batch-load your raw streaming data from GCS into BigQuery, then build your models:
+```bash
+# Load data into BigQuery
+python ../scripts/gcs_to_bq.py
 
+# Run transformations
+cd ../dbt/taxi_analytics
+dbt deps
+dbt run
+```
+
+### 4. Launch Dashboard
+Fire up your local Streamlit instance to view the final analytical metrics:
+```bash
+cd ../../dashboard
+streamlit run app.py
+```
