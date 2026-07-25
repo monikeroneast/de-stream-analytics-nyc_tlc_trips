@@ -1,0 +1,27 @@
+name: "taxi_analytics"
+version: "1.0.0"
+config-version: 2
+
+profile: "taxi_analytics"
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+vars:
+  # Filter out test/invalid trips
+  #min_trip_distance: 0.1
+  min_trip_distance: 0.0
+  max_trip_distance: 200
+  #min_fare: 1.0
+  min_fare: 0.0
+  max_fare: 1000.0
+
+  

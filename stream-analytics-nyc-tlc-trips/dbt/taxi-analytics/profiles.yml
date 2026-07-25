@@ -1,0 +1,13 @@
+taxi_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: "{{ env_var('GCP_PROJECT_ID', 'stream-analytics-nyc-tlc-trips') }}"
+      dataset: taxi_analytics
+      location: asia-south2
+      threads: 4
+      timeout_seconds: 300
+      priority: interactive
+      retries: 1

@@ -12,3 +12,12 @@
 
 # Package manager locks
 .terraform.lock.hcl
+
+#Python Files
+.venv/
+
+#DBT Files
+/taxi-analytics/dbt_packages/
+/taxi-analytics/logs/
+/taxi-analytics/target/
+/taxi-analytics/.user.yml
