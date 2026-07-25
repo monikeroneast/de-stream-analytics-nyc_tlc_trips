@@ -2,7 +2,7 @@
 
 This repository contains an end-to-end data engineering pipeline that ingests, processes, and visualizes real-time and historical NYC Yellow Taxi trip data. 
 
-This project was built as a capstone project for the **[DataTalksClub Data Engineering Zoomcamp](https://github.com)**. It is heavily inspired by and builds upon the structural foundations found in the various peer reference repositories as well. **[de-zoomcamp-project1](https://github.com)**.
+This project was built as a capstone project for the **[DataTalksClub Data Engineering Zoomcamp](https://github.com)**. It is heavily inspired by and builds upon the structural foundations found in the various peer reference repositories as well.
 
 ## 🏗 Architecture & Workflow
 
