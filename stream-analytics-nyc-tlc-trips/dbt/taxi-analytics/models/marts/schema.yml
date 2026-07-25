@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: fct_trips
+    description: >
+      Core fact table containing individual taxi trip records with enriched
+      dimensions and computed metrics. Partitioned by pickup_datetime (DAY)
+      and clustered by pickup_location_id and payment_type.
+    columns:
+      - name: pickup_datetime
+        description: "Timestamp when passenger was picked up"
+        tests:
+          - not_null
+      - name: total_amount
+        description: "Total fare charged"
+        tests:
+          - not_null
+      - name: payment_type
+        description: "Human-readable payment method"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Credit Card', 'Cash', 'No Charge', 'Dispute', 'Unknown', 'Voided', 'Other']
+
+  - name: dim_monthly_stats
+    description: >
+      Monthly aggregated statistics for the dashboard.
+      Pre-computes trip counts, revenue, averages, and payment type breakdowns.
+    columns:
+      - name: year_month
+        description: "Year-Month string (YYYY-MM)"
+        tests:
+          - not_null
+          - unique
+      - name: total_trips
+        description: "Total number of trips in that month"

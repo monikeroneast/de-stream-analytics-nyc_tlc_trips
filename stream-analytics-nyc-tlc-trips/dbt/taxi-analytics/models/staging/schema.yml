@@ -1,0 +1,32 @@
+version: 2
+
+sources:
+  - name: raw
+    database: "{{ env_var('GCP_PROJECT_ID', 'stream-analytics-nyc-tlc-trips') }}"
+    schema: taxi_analytics
+    tables:
+      - name: yellow_taxi_raw
+        description: "Raw NYC Yellow Taxi trip records loaded from GCS data lake"
+        columns:
+          - name: VendorID
+            description: "TPEP provider (1=Creative Mobile, 2=VeriFone)"
+          - name: tpep_pickup_datetime
+            description: "Date and time when the meter was engaged"
+          - name: tpep_dropoff_datetime
+            description: "Date and time when the meter was disengaged"
+          - name: passenger_count
+            description: "Number of passengers (driver-entered)"
+          - name: trip_distance
+            description: "Elapsed trip distance in miles"
+          - name: PULocationID
+            description: "TLC Taxi Zone for pickup"
+          - name: DOLocationID
+            description: "TLC Taxi Zone for dropoff"
+          - name: payment_type
+            description: "Payment method (1=Credit, 2=Cash, 3=No charge, 4=Dispute)"
+          - name: fare_amount
+            description: "Time-and-distance fare calculated by the meter"
+          - name: tip_amount
+            description: "Tip amount (auto-populated for credit card tips)"
+          - name: total_amount
+            description: "Total amount charged to passengers"
