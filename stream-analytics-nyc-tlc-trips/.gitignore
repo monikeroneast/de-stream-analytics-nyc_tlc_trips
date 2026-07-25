@@ -14,10 +14,12 @@
 .terraform.lock.hcl
 
 #Python Files
+venv/
 .venv/
 
 #DBT Files
-/taxi-analytics/dbt_packages/
-/taxi-analytics/logs/
-/taxi-analytics/target/
-/taxi-analytics/.user.yml
+**/dbt_packages/
+**/logs/
+**/target/
+**/.user.yml
+
