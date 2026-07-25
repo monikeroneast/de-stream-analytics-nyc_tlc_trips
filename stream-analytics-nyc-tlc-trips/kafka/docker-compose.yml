@@ -1,0 +1,59 @@
+#version: "3.8" #Defines the configuration file schema version used to parse this file
+
+services: #Starts the block declaring all individual infrastructure containers to build
+  zookeeper: #First Service: Kafka's traditional metadata coordinator.
+    image: confluentinc/cp-zookeeper:7.6.0
+    container_name: zookeeper
+    hostname: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181 #zookeeper listening to scripts running on the host machine at port 2181
+      ZOOKEEPER_TICK_TIME: 2000 #zookeeper heartbeat interval is 2000 ms
+    healthcheck:
+      test: ["CMD", "bash", "-c", "echo ruok | nc localhost 2181"] #netcat command "Are you ok?" to check if zookeeper is running and responding to requests
+      interval: 10s #do the above test every 10 seconds
+      timeout: 5s #wait for 5 seconds for the test to complete
+      retries: 5 #retry the test 5 times before considering zookeeper unhealthy
+
+  kafka: #Second infrastructure Service: the primary streaming data message broker service
+    image: confluentinc/cp-kafka:7.6.0
+    container_name: kafka
+    hostname: kafka
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    ports:
+      - "9092:9092" #kakfa listening to scripts running on the host machine at port 9092
+      - "29092:29092" #kakfa container listening to other containers on the network at port 29092
+    environment:
+      KAFKA_BROKER_ID: 1 #identifier for the kafka broker, must be unique for each broker in the cluster
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181 #connects kafka to zookeeper internal container name and port
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT #maps the listener connectionnames to their security protocols, PLAINTEXT for both internal and external communication
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092 #Configures how routing works depending on who is talking to Kafka: 1st is docker containers within the same network, 2nd is scripts running on the host machine
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1 #number of replicas for the internal topic that stores consumer offsets, set to 1 for single broker setup
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1 #Allows transaction safety controls to run with just 1 active backup broker
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1 #Sets internal logging mechanics to require only 1 active instance copy
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0 #Speeds up local application testing by removing group coordinator startup delays
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true" #Allows Kafka to generate missing topics automatically when a script publishes to them
+      KAFKA_MESSAGE_MAX_BYTES: 10485760 #maximum size of a single message that can be sent to Kafka (10 MB)
+      KAFKA_REPLICA_FETCH_MAX_BYTES: 10485760 #maximum size of a single message that can be fetched from Kafka (10 MB)
+    healthcheck:
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "kafka:29092", "--list"]
+      interval: 15s #check if kafka is running and responding to requests every 15 seconds
+      timeout: 10s #wait for 10 seconds for the test to complete
+      retries: 5 #retry the test 5 times before considering kafka unhealthy
+
+  # Optional: Kafka UI for debugging
+  kafka-ui: #Third Service: Kafka User Interface Service
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    depends_on:
+      kafka:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
