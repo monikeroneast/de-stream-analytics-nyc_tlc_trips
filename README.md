@@ -37,3 +37,13 @@ The architecture uses a mix of streaming infrastructure, cloud storage, data war
 * **Transformation Layer:** dbt Core
 * **Dashboard / Frontend:** Streamlit
 * **Containerization:** Docker & Docker Compose
+* **[NotionLink]:** (https://bevel-chestnut-da0.notion.site/NYC-Yellow-Taxi-Analytics-Pipeline-3a893f2c74c080abb441f7d14d68c22f?pvs=25)
+
+## About Me
+Data Engineer and Analytics Engineer with 8+ years of experience spanning enterprise data architecture, cloud data platforms, and business intelligence, with a background in software applications, digital backend platforms, and connected vehicle ecosystems. Expert at defining data contracts and translating complex business requirements into production-ready data pipelines. Combines hands-on proficiency in Snowflake, BigQuery, Kafka, Spark and dbt with strong stakeholder and cross-functional delivery experience to deliver scalable, cost-optimized data assets.
+
+Experienced across enterprise operations, systems, and cross-functional execution (Ex-Tata Motors), specializing in translating complex business problems into scalable, data-driven systems by working closely with engineering and analytics teams.
+
+Currently based in India and open to Data Engineering and Analytics Engineering roles where I can bring both technical depth and stakeholder fluency from my product background. Happy to connect!
+
+**[Notion Link]:** (https://bevel-chestnut-da0.notion.site/Jai-Lalita-Soren-Data-Engineering-Portfolio-32c93f2c74c080a6b4bae9fc24c8b730)
