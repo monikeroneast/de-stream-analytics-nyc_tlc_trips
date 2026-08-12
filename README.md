@@ -40,9 +40,9 @@ The architecture uses a mix of streaming infrastructure, cloud storage, data war
 * **[NotionLink]:** (https://bevel-chestnut-da0.notion.site/NYC-Yellow-Taxi-Analytics-Pipeline-3a893f2c74c080abb441f7d14d68c22f?pvs=25)
 
 ## About Me
-Data Engineer and Analytics Engineer with 8+ years of experience spanning enterprise data architecture, cloud data platforms, and business intelligence, with a background in software applications, digital backend platforms, and connected vehicle ecosystems. Expert at defining data contracts and translating complex business requirements into production-ready data pipelines. Combines hands-on proficiency in Snowflake, BigQuery, Kafka, Spark and dbt with strong stakeholder and cross-functional delivery experience to deliver scalable, cost-optimized data assets.
+Data Engineer transitioning from 6+ years of technical product leadership into hands-on engineering. Over the past 2 years, I've built end-to-end ELT pipelines using Snowflake, BigQuery, Kafka, and dbt — through certifications and portfolio projects spanning cloud warehousing, streaming ingestion, and dimensional modeling.
 
-Experienced across enterprise operations, systems, and cross-functional execution (Ex-Tata Motors), specializing in translating complex business problems into scalable, data-driven systems by working closely with engineering and analytics teams.
+Before this pivot, I spent 6+ years in enterprise operations and cross-functional delivery at Tata Motors, defining data requirements and translating business needs into technical specifications across cloud data migrations and connected vehicle systems. That experience now shapes how I approach engineering work — stakeholder-aware, delivery-minded, and grounded in real production context.
 
 Currently based in India and open to Data Engineering and Analytics Engineering roles where I can bring both technical depth and stakeholder fluency from my product background. Happy to connect!
 
