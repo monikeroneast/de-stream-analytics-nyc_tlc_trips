@@ -40,7 +40,7 @@ The architecture uses a mix of streaming infrastructure, cloud storage, data war
 * **[NotionLink]:** (https://bevel-chestnut-da0.notion.site/NYC-Yellow-Taxi-Analytics-Pipeline-3a893f2c74c080abb441f7d14d68c22f?pvs=25)
 
 ## About Me
-Data Professional transitioning 8 years of corporate IT delivery into core data infrastructure and analytics engineering roles. I bring 3 years of hands-on depth building scalable, end-to-end ELT pipelines using BigQuery, AWS, dbt, and Airflow, backed by a strong track record as a Technical Product Owner managing enterprise data platform modernizations at Tata Motors.
+Data Engineering Professional with 8 years of enterprise IT delivery experience, including 3+ years of dedicated hands-on depth designing scalable ELT pipelines, cloud data architectures, and leading cross-functional data platform modernizations.
 That background uniquely shapes how I approach data engineering—combining structural engineering depth with strong stakeholder fluency, technical product roadmap delivery, and real production context.
 
 Currently based in India and open to Data Engineering and Analytics Engineering roles where I can bring both technical depth and stakeholder fluency from my product background. Happy to connect!
